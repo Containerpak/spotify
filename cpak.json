@@ -10,7 +10,7 @@
     "/usr/share/spotify/spotify.desktop"
   ],
   "dependencies": [],
-  "future_dependencies": [],
+  "addons": [],
   "idle_time": 0,
   "override": {
     "socketX11": true,
