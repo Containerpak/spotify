@@ -3,7 +3,7 @@ FROM ghcr.io/containerpak/mesa@sha256:79d69be1e64e105aa86a6bcfb492f15268d568fb0a
 RUN apt update && apt install -y \
     curl \
     squashfs-tools \
-    file && \
+    file \
     libasound2t64 && \
     rm -rf /var/lib/apt/lists/*
 
