@@ -27,7 +27,7 @@
     "deviceAll": true,
     "fsHost": false,
     "fsHostEtc": false,
-    "fsHostHome": false,
+    "fsHostHome": true,
     "fsExtra": [],
     "env": [],
     "network": true,
