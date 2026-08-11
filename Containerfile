@@ -1,17 +1,19 @@
-FROM ghcr.io/containerpak/mesa@sha256:79d69be1e64e105aa86a6bcfb492f15268d568fb0adfc6450c88bbed3c9a8e91
+FROM ubuntu:26.04 AS source
 
-RUN apt update && apt install -y \
-    curl \
-    squashfs-tools \
-    file \
-    libasound2t64 && \
-    rm -rf /var/lib/apt/lists/*
+ADD --checksum=sha256:98a9310173563965be5cd306b25a219823f9c0da809fda9bf51a34c9638578d0 \
+    https://api.snapcraft.io/api/v1/snaps/download/pOBIoZ2LrCB3rDohMxoYGnbN14EHOgD7_97.snap \
+    /tmp/spotify.snap
 
-ARG SPOTIFY_SNAP_URL="https://api.snapcraft.io/api/v1/snaps/download/pOBIoZ2LrCB3rDohMxoYGnbN14EHOgD7_86.snap"
+FROM ghcr.io/containerpak/gtk:main
 
-RUN mkdir -p /app && \
-    curl -L -H "Snap-Device-Series: 16" "${SPOTIFY_SNAP_URL}" -o /tmp/spotify.snap && \
-    unsquashfs -d /app/squashfs-root /tmp/spotify.snap && \
-    cp -r /app/squashfs-root/usr/* /usr/ && \
-    rm -r /tmp/spotify.snap /app/squashfs-root && \
-    /usr/bin/cpak-clean-junk
+COPY --from=source /tmp/spotify.snap /tmp/spotify.snap
+COPY spotify /usr/local/lib/cpak/spotify
+
+RUN apt update && \
+    apt install -y --no-install-recommends \
+      file libasound2t64 libayatana-appindicator3-1 libnss3 squashfs-tools && \
+    unsquashfs -d /tmp/spotify-root /tmp/spotify.snap && \
+    cp -a /tmp/spotify-root/usr/. /usr/ && \
+    install -m 0755 /usr/local/lib/cpak/spotify /usr/bin/spotify && \
+    rm -rf /tmp/spotify.snap /tmp/spotify-root && \
+    cpak-clean-junk
