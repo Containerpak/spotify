@@ -54,6 +54,9 @@ jobs:
           provenance: mode=max
           sbom: true
 
+      - name: Verify adapter
+        run: docker run --rm ghcr.io/containerpak/spotify:main sh -c 'test ! -e /usr/bin/spotify && test ! -e /usr/share/spotify/spotify.desktop'
+
       - name: Publish summary
         run: echo "ghcr.io/containerpak/spotify@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
 

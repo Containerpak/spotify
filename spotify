@@ -1,3 +1,0 @@
-#!/bin/sh
-export LD_LIBRARY_PATH="/usr/share/spotify${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-exec /usr/share/spotify/spotify "$@"
