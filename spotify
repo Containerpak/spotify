@@ -1,0 +1,6 @@
+#!/bin/sh
+
+exec /usr/share/spotify/spotify \
+    --enable-features=UseOzonePlatform \
+    --ozone-platform=wayland \
+    "$@"

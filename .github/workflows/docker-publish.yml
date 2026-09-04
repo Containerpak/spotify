@@ -55,7 +55,7 @@ jobs:
           sbom: true
 
       - name: Verify adapter
-        run: docker run --rm ghcr.io/containerpak/spotify:main sh -c 'test ! -e /usr/bin/spotify && test ! -e /usr/share/spotify/spotify.desktop'
+        run: docker run --rm ghcr.io/containerpak/spotify:main sh -c 'test -x /usr/local/bin/spotify && grep -Fq -- "--ozone-platform=wayland" /usr/local/bin/spotify && test ! -e /usr/bin/spotify && test ! -e /usr/share/spotify/spotify.desktop'
 
       - name: Publish summary
         run: echo "ghcr.io/containerpak/spotify@${{ steps.build.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
@@ -79,8 +79,8 @@ jobs:
 
       - name: Install cpak-sign
         run: |
-          curl -fsSLO https://github.com/Containerpak/cpak/releases/download/v2.10.16/cpak-sign-linux-amd64
-          echo 'ef28930705bdbdd04de4ef3724bd2b65f873cec5709964ce657a9b7f7e0a9a4d  cpak-sign-linux-amd64' | sha256sum -c -
+          curl -fsSLO https://github.com/Containerpak/cpak/releases/download/v2.12.5/cpak-sign-linux-amd64
+          echo '22cf35e67af53581e5fa5b210577dd3e344df54ed3f6e7c76020384d3be65322  cpak-sign-linux-amd64' | sha256sum -c -
           install -Dm755 cpak-sign-linux-amd64 /usr/local/bin/cpak-sign
 
       - name: Sign the package state

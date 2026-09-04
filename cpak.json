@@ -16,7 +16,7 @@
     }
   ],
   "binaries": [
-    "/usr/bin/spotify"
+    "/usr/local/bin/spotify"
   ],
   "desktop_entries": [
     "/usr/share/spotify/spotify.desktop"
@@ -47,6 +47,11 @@
     "notification": true,
     "openURI": true,
     "hostApplications": false,
+    "sessionBus": {
+      "own": [
+        "org.mpris.MediaPlayer2.spotify"
+      ]
+    },
     "filesystem": [
       {
         "path": "home",
