@@ -4,7 +4,7 @@
   "name": "Spotify",
   "description": "Listen to music and podcasts with Spotify.",
   "version": "1.2.95.453.g0eeebbed",
-  "image": "ghcr.io/containerpak/spotify@sha256:8d744fd51fcf74d78f887d6e80d9bdb3884a45a37da20f3647e10db491eb4e51",
+  "image": "ghcr.io/containerpak/spotify@sha256:b4690d976fec4a8b5e24ff047e9783db1f51c2ffe7041135b1c8db4783c8b20a",
   "runtime_sources": [
     {
       "name": "spotify-client_1.2.95.453.g0eeebbed_amd64.deb",
